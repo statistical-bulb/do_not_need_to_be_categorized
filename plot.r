@@ -31,7 +31,7 @@ fit_nl <- lm(y ~ rcs(x,
              data = simdat)
 fit_fp <- mfp(y ~ fp(x), data = simdat)
 
-# add knots to get a lines add the knots
+# add knots to get lines add the knots
 simdat <- rbind(
   simdat,
   c(x = quantile(simdat$x, probs = c(0.10)), y = NA, cat = 1),
