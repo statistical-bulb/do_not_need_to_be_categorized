@@ -16,9 +16,9 @@ y <- x + x^2 + rnorm(N)
 simdat <- data.frame(x = x, y = y)
 
 # Categorize x ------------------------------------------------------------
-simdat$cat <- cut(simdat$x,
-                  c(min(simdat$x - 0.1),
-                    quantile(simdat$x,
+simdat$cat <- cut(x,
+                  c(min(x - 0.1),
+                    quantile(x,
                              probs = c(0.10, 0.5, 0.90, 1))),
                   labels = c(1:4)
 )
@@ -26,7 +26,7 @@ simdat$cat <- cut(simdat$x,
 # Regression models -------------------------------------------------------
 fit_cat <- lm(y ~ cat, data = simdat)
 fit_nl <- lm(y ~ rcs(x,
-                     quantile(simdat$x,
+                     quantile(x,
                               probs = c(0.10, 0.5, 0.90))),
              data = simdat)
 fit_fp <- mfp(y ~ fp(x), data = simdat)
@@ -57,7 +57,7 @@ xhist <- hist(x, plot = FALSE)
 yhist <- hist(y, plot = FALSE)
 top <- max(c(xhist$counts, yhist$counts))
 par(mar = c(1, 1, 1.5, 1))
-plot(simdat$x, simdat$y,
+plot(x, y,
      col = "gray", pch = 19,
      main = "",
      xlab = "",
