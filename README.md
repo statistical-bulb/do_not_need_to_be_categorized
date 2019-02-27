@@ -1,2 +1,2 @@
-# do_not_need_to_be_categorized
+# Just a reminder: continuous variables do not need to be categorized. 
 R code used to create the figure concat.png.
