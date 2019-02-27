@@ -80,7 +80,7 @@ legend(min(x, na.rm = TRUE) - 0.2,
        c("Categorized variable (quartiles)",
          "Restricted cubic splines (3 knots)",
          expression(paste(
-           "Fractional Polynomials (",
+           "Fractional polynomials (",
            p[1] == 0.5, ", ", p[2] == 3, ")"))),
        text.col = c("red", "blue", "#FFBF00"),
        col = c("red", "blue", "#FFBF00"), # cex = 0.8,
