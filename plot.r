@@ -8,14 +8,12 @@
 library(rms)
 library(mfp)
 
-
 # Simulation model --------------------------------------------------------
 set.seed(20190227)
 N <- 500
 x <- rnorm(N)
 y <- x + x^2 + rnorm(N)
 simdat <- data.frame(x = x, y = y)
-
 
 # Categorize x ------------------------------------------------------------
 simdat$cat <- cut(simdat$x,
@@ -24,7 +22,6 @@ simdat$cat <- cut(simdat$x,
                              probs = c(0.10, 0.5, 0.90, 1))),
                   labels = c(1:4)
 )
-
 
 # Regression models -------------------------------------------------------
 fit_cat <- lm(y ~ cat, data = simdat)
@@ -45,13 +42,10 @@ simdat <- rbind(
 )
 simdat <- simdat[order(simdat$x), ]
 
-
-
 # Create a nice plot and save as png file ---------------------------------
 png("concat.png",
     height = 640, width = 640 * 1.618,
-    pointsize = 18
-)
+    pointsize = 18)
 
 # based on scatterhist by Ken Kleinman
 # https://www.r-bloggers.com/example-8-41-scatterplot-with-marginal-histograms/
