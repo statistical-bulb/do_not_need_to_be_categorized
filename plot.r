@@ -31,16 +31,16 @@ fit_nl <- lm(y ~ rcs(x,
              data = simdat)
 fit_fp <- mfp(y ~ fp(x), data = simdat)
 
-# add knots to get lines add the knots
+# add knots to get a lines add the knots
 simdat <- rbind(
   simdat,
-  c(x = quantile(simdat$x, probs = c(0.10)), y = NA, cat = 1),
-  c(x = quantile(simdat$x, probs = c(0.10)), y = NA, cat = 2),
-  c(x = quantile(simdat$x, probs = c(0.50)), y = NA, cat = 2),
-  c(x = quantile(simdat$x, probs = c(0.50)), y = NA, cat = 3),
-  c(x = quantile(simdat$x, probs = c(0.90)), y = NA, cat = 3)
+  c(x = quantile(x, probs = c(0.10)), y = NA, cat = 1),
+  c(x = quantile(x, probs = c(0.10)), y = NA, cat = 2),
+  c(x = quantile(x, probs = c(0.50)), y = NA, cat = 2),
+  c(x = quantile(x, probs = c(0.50)), y = NA, cat = 3),
+  c(x = quantile(x, probs = c(0.90)), y = NA, cat = 3)
 )
-simdat <- simdat[order(simdat$x), ]
+simdat <- simdat[order(x), ]
 
 # Create a nice plot and save as png file ---------------------------------
 png("concat.png",
@@ -64,17 +64,17 @@ plot(simdat$x, simdat$y,
      ylab = "",
      axes = FALSE,
      frame.plot = TRUE)
-axis(side = 1, at = simdat$x, labels = FALSE)
-axis(side = 2, at = simdat$y, labels = FALSE)
+axis(side = 1, at = x, labels = FALSE)
+axis(side = 2, at = y, labels = FALSE)
 abline(
-  v = quantile(simdat$x,
+  v = quantile(x,
                probs = c(0.10, 0.5, 0.90),
                type = 8),
   lty = "dashed", 
   col = "darkgray")
-lines(simdat$x, predict(fit_cat, simdat), col = "red", lwd = 3)
-lines(simdat$x, predict(fit_nl, simdat), col = "blue", lwd = 3)
-lines(simdat$x, predict(fit_fp, simdat), col = "#FFBF00", lwd = 3)
+lines(x, predict(fit_cat, simdat), col = "red", lwd = 3)
+lines(x, predict(fit_nl, simdat), col = "blue", lwd = 3)
+lines(x, predict(fit_fp, simdat), col = "#FFBF00", lwd = 3)
 legend(min(x, na.rm = TRUE) - 0.2, 
        max(y, na.rm = TRUE) + 0.55,
        c("Categorized variable (quartiles)",
